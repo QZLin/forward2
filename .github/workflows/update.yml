@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  update:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Say Hello
+        run: echo "Hello, world!"
+
+      - name: Debug
+        run: |
+          ls
+          pwd
+
+      - run: git clone https://github.com/coredns/coredns.git --depth=1
+      - run: git clone https://github.com/QZLin/forward.git --depth=1
+
+      - name: Debug
+        run: |
+          ls
+          pwd
+
+      - name: Extract plugin forward form coredns
+        run: |
+          cp coredns/plugin/forward coredns-forward
+
+      - name: Sync .github folder
+        run: |
+          cp forward/.github coredns-forward
+
+      - name: Commit and push
+        run: |
+          cd coredns-forward
+          git config --global user.email "qzlin01@163.com"
+          git config --global user.name "QZLin"
+          git init
+          git add .
+          git commit -m "Auto sync"
+          git remote add origin https://github.com/QZLin/forward.git
+          git push --set-upstream origin main --force
+          git push
