@@ -20,12 +20,11 @@ jobs:
         with:
           repository: qzlin/forward
           fetch-depth: 0
-          path: forward
       - uses: actions/checkout@v3
         with:
           repository: qzlin/forward2
           ref: main
           fetch-depth: 0
-          path: forward2
+      - run: cd ${{ github.workspace }}
       - name: update
         run: . ./update.ps1
