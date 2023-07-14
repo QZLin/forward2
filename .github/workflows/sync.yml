@@ -16,15 +16,25 @@ jobs:
       run:
         shell: pwsh
     steps:
+      # - run: $env:WORKSPACE_ROOT=Get-Location
       - uses: actions/checkout@v3
         with:
-          repository: qzlin/forward
-          fetch-depth: 0
+          repository: QZLin/forward2
+          ref: sync
+          # path: forward2_sync
+      - run: echo "::debug::$(ls -a)"
       - uses: actions/checkout@v3
         with:
-          repository: qzlin/forward2
-          ref: main
+          repository: QZLin/forward
           fetch-depth: 0
-      - run: cd ${{ github.workspace }}
+          path: forward
+      - uses: actions/checkout@v3
+        with:
+          repository: QZLin/forward2
+          fetch-depth: 0
+          path: forward2
       - name: update
-        run: . ./update.ps1
+        run: |
+          echo "::debug::$(Get-Location)"
+          echo "::debug::$(ls -a)"
+          pwsh ./update.ps1
