@@ -8,5 +8,5 @@ git reset HEAD~1 --hard
 git pull ../forward
 ../rename_all.ps1 .
 git commit -a -m 'rename'
-git push --force
+# git push --force
 Pop-Location
