@@ -56,4 +56,4 @@ jobs:
           echo "::debug::$(ls -a)"
           git config core.sshCommand "ssh -i .git/id_xx"
           popd
-          pwsh ../update.ps1
+          pwsh ./update.ps1
