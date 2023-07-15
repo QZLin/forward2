@@ -4,8 +4,6 @@ permissions: write-all
 on:
   push:
     branches: [sync]
-  pull_request:
-    branches: [sync]
 
   workflow_dispatch:
 
@@ -33,8 +31,26 @@ jobs:
           repository: QZLin/forward2
           fetch-depth: 0
           path: forward2
+      - name: Set Git Info & Check Git config
+        run: |
+          git config --global user.email "qzlin01@163.com"
+          git config --global user.name "Github Actions"
+          git config --global --unset core.repositoryformatversion
+          git config --list
+      - name: Setup repo deploy key
+        run: |
+          cd forward2
+          $key_name='id_xx'
+          # New-Item -ItemType Directory ~/.ssh -ErrorAction SilentlyContinue
+          New-Item .git/$key_name
+          chmod 0600 .git/$key_name
+          python3 binary_tool.py -d --base64-input ${{ secrets.DEPLOYKEY1 }} -o (Get-Item .git/$key_name)
+          ssh-keygen -y -f .git/$key_name > .git/$key_name.pub
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          cd ..
       - name: update
         run: |
           echo "::debug::$(Get-Location)"
           echo "::debug::$(ls -a)"
+          git config core.sshCommand "ssh -i .git/id_xx"
           pwsh ./update.ps1
