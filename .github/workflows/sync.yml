@@ -48,6 +48,7 @@ jobs:
           python3 ../binary_tool.py -d --base64-input ${{ secrets.DEPLOYKEY1 }} -o (Get-Item .git/$key_name)
           ssh-keygen -y -f .git/$key_name > .git/$key_name.pub
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git remote set-url origin git@github.com:QZLin/forward2.git
           popd
       - name: update
         run: |
