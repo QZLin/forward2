@@ -40,7 +40,7 @@ jobs:
       - name: Setup repo deploy key
         run: |
           wget https://github.com/QZLin/binary_tool/releases/download/v0.1/binary_tool.py
-          cd forward2
+          pushd forward2
           $key_name='id_xx'
           New-Item -ItemType Directory ~/.ssh -ErrorAction SilentlyContinue
           New-Item .git/$key_name
@@ -48,10 +48,12 @@ jobs:
           python3 ../binary_tool.py -d --base64-input ${{ secrets.DEPLOYKEY1 }} -o (Get-Item .git/$key_name)
           ssh-keygen -y -f .git/$key_name > .git/$key_name.pub
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          cd ..
+          popd
       - name: update
         run: |
+          pushd forward2
           echo "::debug::$(Get-Location)"
           echo "::debug::$(ls -a)"
           git config core.sshCommand "ssh -i .git/id_xx"
-          pwsh ./update.ps1
+          popd
+          pwsh ../update.ps1
