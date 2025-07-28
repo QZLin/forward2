@@ -1,4 +1,4 @@
-package forward
+package forward2
 
 import (
 	"strings"
@@ -58,7 +58,7 @@ func TestSetTapPlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	dnsserver.NewServer("", []*dnsserver.Config{dnsserver.GetConfig(c)})
-	f, ok := dnsserver.GetConfig(c).Handler("forward").(*Forward)
+	f, ok := dnsserver.GetConfig(c).Handler("forward2").(*Forward)
 	if !ok {
 		t.Fatal("Expected a forward plugin")
 	}
