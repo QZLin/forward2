@@ -1,4 +1,4 @@
-package forward
+package forward2
 
 import (
 	"crypto/tls"
@@ -22,18 +22,18 @@ import (
 )
 
 func init() {
-	plugin.Register("forward", setup)
+	plugin.Register("forward2", setup)
 }
 
 func setup(c *caddy.Controller) error {
 	fs, err := parseForward(c)
 	if err != nil {
-		return plugin.Error("forward", err)
+		return plugin.Error("forward2", err)
 	}
 	for i := range fs {
 		f := fs[i]
 		if f.Len() > max {
-			return plugin.Error("forward", fmt.Errorf("more than %d TOs configured: %d", max, f.Len()))
+			return plugin.Error("forward2", fmt.Errorf("more than %d TOs configured: %d", max, f.Len()))
 		}
 
 		if i == len(fs)-1 {
@@ -176,7 +176,7 @@ func parseStanza(c *caddy.Controller) (*Forward, error) {
 			tlsServerNames[i] = serverName
 			perServerNameProxyCount[serverName]++
 		}
-		p := proxy.NewProxy("forward", h, trans)
+		p := proxy.NewProxy("forward2", h, trans)
 		f.proxies = append(f.proxies, p)
 		transports[i] = trans
 	}

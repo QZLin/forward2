@@ -2,7 +2,7 @@
 // client returns the upstream's Conn will be precached. Depending on how you benchmark this looks to be
 // 50% faster than just opening a new connection for every client. It works with UDP and TCP and uses
 // inband healthchecking.
-package forward
+package forward2
 
 import (
 	"context"
@@ -24,7 +24,7 @@ import (
 	otext "github.com/opentracing/opentracing-go/ext"
 )
 
-var log = clog.NewWithPlugin("forward")
+var log = clog.NewWithPlugin("forward2")
 
 const (
 	defaultExpire = 10 * time.Second
@@ -95,7 +95,7 @@ func (f *Forward) SetTapPlugin(tapPlugin *dnstap.Dnstap) {
 func (f *Forward) Len() int { return len(f.proxies) }
 
 // Name implements plugin.Handler.
-func (f *Forward) Name() string { return "forward" }
+func (f *Forward) Name() string { return "forward2" }
 
 // ServeDNS implements plugin.Handler.
 func (f *Forward) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg) (int, error) {

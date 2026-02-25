@@ -1,6 +1,6 @@
 //go:build gofuzz
 
-package forward
+package forward2
 
 import (
 	"github.com/coredns/coredns/plugin/pkg/dnstest"
