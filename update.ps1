@@ -7,6 +7,10 @@ Push-Location forward2
 git reset HEAD~1 --hard
 git pull ../forward
 ../rename_all.ps1 .
+go mod init
+go mod tidy
+git add go.mod go.sum
+git add
 git commit -a -m 'rename'
 # git push --force
 Pop-Location
