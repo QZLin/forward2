@@ -7,7 +7,7 @@ Push-Location forward2
 git reset HEAD~1 --hard
 git pull ../forward
 ../rename_all.ps1 .
-go mod init
+go mod init github.com/qzlin/forward2
 go mod tidy
 git add go.mod go.sum
 git add
