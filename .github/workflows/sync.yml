@@ -30,6 +30,8 @@ jobs:
           repository: QZLin/forward2
           fetch-depth: 0
           path: forward2
+      - name: Setup Go environment
+        uses: actions/setup-go@v7.0.0
       - name: Set Git Info & Check Git config
         run: |
           git config --global user.email "qzlin01@163.com"
