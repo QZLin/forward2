@@ -1,4 +1,4 @@
-package forward
+package forward2
 
 import (
 	"context"
@@ -69,7 +69,7 @@ func TestSetTapPlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	dnsserver.NewServer("", []*dnsserver.Config{dnsserver.GetConfig(c)})
-	f, ok := dnsserver.GetConfig(c).Handler("forward").(*Forward)
+	f, ok := dnsserver.GetConfig(c).Handler("forward2").(*Forward)
 	if !ok {
 		t.Fatal("Expected a forward plugin")
 	}
@@ -124,7 +124,7 @@ func TestForward_Regression_NoBusyLoop(t *testing.T) {
 			f.maxConnectAttempts = tc.maxAttempts
 
 			// Assume nothing is listening on this port, so the connection will be refused.
-			p := proxy.NewProxy("forward", "127.0.0.1:54321", "tcp")
+			p := proxy.NewProxy("forward2", "127.0.0.1:54321", "tcp")
 			f.SetProxy(p)
 
 			// Create a mock tracer to count the number of connection attempts.
@@ -325,7 +325,7 @@ func TestForwardDoesNotRetryLocalPackError(t *testing.T) {
 	f.maxConnectAttempts = 2
 	f.opts.ForceTCP = true
 	f.proxies = []*proxy.Proxy{
-		proxy.NewProxy("forward", "127.0.0.1:1", transport.DNS),
+		proxy.NewProxy("forward2", "127.0.0.1:1", transport.DNS),
 	}
 
 	tracer := mocktracer.New()

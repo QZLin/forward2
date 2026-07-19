@@ -1,4 +1,4 @@
-package forward
+package forward2
 
 import clog "github.com/coredns/coredns/plugin/pkg/log"
 

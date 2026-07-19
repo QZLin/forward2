@@ -1,4 +1,4 @@
-package forward
+package forward2
 
 import (
 	"fmt"
@@ -457,7 +457,7 @@ func TestSetupWithHostnameTO(t *testing.T) {
 	for _, addr := range resolvedAddrs {
 		host, _ := splitZone(addr)
 		trans, h := parse.Transport(host)
-		p := proxy.NewProxy("forward", h, trans)
+		p := proxy.NewProxy("forward2", h, trans)
 		f.proxies = append(f.proxies, p)
 	}
 
@@ -498,7 +498,7 @@ func TestSetupMixedIPAndHostnameTO(t *testing.T) {
 	for _, addr := range resolvedAddrs {
 		host, _ := splitZone(addr)
 		trans, h := parse.Transport(host)
-		p := proxy.NewProxy("forward", h, trans)
+		p := proxy.NewProxy("forward2", h, trans)
 		f.proxies = append(f.proxies, p)
 	}
 
