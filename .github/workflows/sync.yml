@@ -15,17 +15,17 @@ jobs:
         shell: pwsh
     steps:
       # - run: $env:WORKSPACE_ROOT=Get-Location
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           repository: QZLin/forward2
           ref: sync
       - run: echo "::notice::$(ls -a)"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           repository: QZLin/forward
           fetch-depth: 0
           path: forward
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           repository: QZLin/forward2
           fetch-depth: 0
@@ -40,7 +40,7 @@ jobs:
           git config --list
       - name: Setup repo deploy key
         run: |
-          wget https://github.com/QZLin/binary_tool/releases/download/v0.1/binary_tool.py
+          wget -O"binary_tool.py" https://github.com/QZLin/binary_tool/releases/download/v0.1/binary_tool.py
           pushd forward2
           $key_name='id_xx'
           New-Item -ItemType Directory ~/.ssh -ErrorAction SilentlyContinue

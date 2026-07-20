@@ -1,10 +1,10 @@
-param( $TargetDir)
+param($TargetDir)
 Push-Location $TargetDir
-foreach ($_ in Get-ChildItem -Filter *.go ) {
-    $content = Get-Content $_
+foreach ($file in Get-ChildItem -Filter *.go ) {
+    $content = Get-Content $file
     $content = $content `
         -replace "^package forward$", "package forward2" `
         -replace '"forward"', '"forward2"'
-    Set-Content -Path $_ -Value $content
+    Set-Content -Path $file -Value $content
 }
 Pop-Location
