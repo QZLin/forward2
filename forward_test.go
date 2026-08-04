@@ -191,7 +191,7 @@ func TestForward_DefaultConnectAttemptCap(t *testing.T) {
 					t.Fatalf("failed to close upstream listener: %v", err)
 				}
 				upstreams = append(upstreams, upstream)
-				f.SetProxy(proxy.NewProxy("forward", upstream, "tcp"))
+				f.SetProxy(proxy.NewProxy("forward2", upstream, "tcp"))
 			}
 
 			tracer := mocktracer.New()
